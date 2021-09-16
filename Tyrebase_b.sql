@@ -1,0 +1,28 @@
+CREATE TABLE bandenwissel (ID int(10) NOT NULL AUTO_INCREMENT, DR_ID int(10) NOT NULL, Change_Time varchar(255), Car_Nr int(10), Tyre_Type varchar(255) NOT NULL, PRIMARY KEY (ID));
+CREATE TABLE brand (Tyre_type varchar(255) NOT NULL, tyreBrand varchar(255), tyreGrade varchar(255), dutyTime varchar(255), PRIMARY KEY (Tyre_type));
+CREATE TABLE circuit (C_ID varchar(255) NOT NULL, Circuit varchar(255), City varchar(255), Country varchar(255), PRIMARY KEY (C_ID));
+CREATE TABLE driver (D_ID int(10) NOT NULL AUTO_INCREMENT, Driver varchar(255), Team_Code varchar(255) NOT NULL, PRIMARY KEY (D_ID));
+CREATE TABLE driver_race (DR_ID int(10) NOT NULL AUTO_INCREMENT, D_ID int(10) NOT NULL, `Date` int(10), RaceTime varchar(255), PRIMARY KEY (DR_ID));
+CREATE TABLE Race (`Date` int(10) NOT NULL AUTO_INCREMENT, C_ID varchar(255) NOT NULL, PRIMARY KEY (`Date`));
+CREATE TABLE Team (Team_Code varchar(255) NOT NULL, TeamName varchar(255), driverD_ID int(10) NOT NULL, PRIMARY KEY (Team_Code));
+ALTER TABLE bandenwissel ADD CONSTRAINT FKbandenwiss866110 FOREIGN KEY (DR_ID) REFERENCES driver_race (DR_ID);
+ALTER TABLE driver_race ADD CONSTRAINT FKdriver_rac959333 FOREIGN KEY (D_ID) REFERENCES driver (D_ID);
+ALTER TABLE Team ADD CONSTRAINT FKTeam8924 FOREIGN KEY (driverD_ID) REFERENCES driver (D_ID);
+ALTER TABLE driver ADD CONSTRAINT FKdriver304487 FOREIGN KEY (Team_Code) REFERENCES Team (Team_Code);
+ALTER TABLE Race ADD CONSTRAINT FKRace677853 FOREIGN KEY (C_ID) REFERENCES circuit (C_ID);
+ALTER TABLE bandenwissel ADD CONSTRAINT FKbandenwiss305596 FOREIGN KEY (Tyre_Type) REFERENCES brand (Tyre_type);
+
+
+ALTER TABLE bandenwissel DROP FOREIGN KEY FKbandenwiss866110;
+ALTER TABLE driver_race DROP FOREIGN KEY FKdriver_rac959333;
+ALTER TABLE Team DROP FOREIGN KEY FKTeam8924;
+ALTER TABLE driver DROP FOREIGN KEY FKdriver304487;
+ALTER TABLE Race DROP FOREIGN KEY FKRace677853;
+ALTER TABLE bandenwissel DROP FOREIGN KEY FKbandenwiss305596;
+DROP TABLE IF EXISTS bandenwissel;
+DROP TABLE IF EXISTS brand;
+DROP TABLE IF EXISTS circuit;
+DROP TABLE IF EXISTS driver;
+DROP TABLE IF EXISTS driver_race;
+DROP TABLE IF EXISTS Race;
+DROP TABLE IF EXISTS Team;
